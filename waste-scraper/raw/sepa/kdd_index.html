@@ -1,0 +1,156 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="fragment" content="!">
+
+    <title>Registar divljih deponija</title>
+    <meta name="viewport" content="width=device-width" initial-scale=1>
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <link rel="shortcut icon" href="logo.ico" type="image/x-icon">
+    <link rel="icon" href="logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.35/esri/themes/calcite/dijit/calcite.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.35/esri/themes/calcite/esri/esri.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.20/esri/dijit/LayerList/css/LayerList.css">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link href="css/font-awesome.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/dgrid.css" rel="stylesheet" />
+</head>
+<body class="calcite app-loading no-touch">
+
+    <div class="loading-indicator" role="presentation">
+        <div class="loading-message" id="loading_message"></div>
+    </div>
+
+    <div id="divKontejner" data-design="headline" style="width: 100%; height: 100%; padding: 0; margin: 0; visibility: visible;">
+
+        <div id="hederKont" class="hederKontejner">
+            <div id="naslovUnutar" class="hederKontejnerUnutar">
+                <a href="http://www.sepa.gov.rs/" target="_blank"><img id="ministarstvo" style="width: auto; height: 60px;" src="logo.ico"></a>
+            </div>
+            <div id="naslovHeder" class="naslovHed">Registar divljih deponija</div>
+            <div id="infoApl" class="oAplikaciji fa-info" title="O aplikaciji"></div>
+        </div>
+        
+        <div id="levaNav" class="leviMeni">
+            <div id="nazz" class="nav nazad fa-mail-reply" title="Prethodni prikaz"></div>
+            <div id="pocett" class="nav pocetni fa-home" title="Početni prikaz"></div>
+            <div id="napp" class=" nav napred fa-mail-forward" title="Naredni prikaz"></div>
+            
+            
+            <!--<div id="xyy" class="alat xy" title="Go to XY">-->
+                <!--<img style="width: 18px; height: 18px; margin: 11px;" src="images/measure.png" />-->
+            <!--</div>-->
+        </div>
+
+        <div id="desnaNav">
+            <div id="prett" class="alat pretraga" title="Pretraga"></div>
+            <div id="statt" class="alat statistika" title="Statistika"></div>
+            <div id="sadd" class="alat sadrzaj" title="Slojevi mape"></div>
+            
+            <div id="podll" class="alat podloge" title="Podloge"></div>
+        </div>
+
+        <div id="mapKontejner" class="map">
+            <img id="osvezavanjeSl" src="images/ajax-loader.gif" style="position: fixed; right: 50%; top: 50%; z-index: 1000; display: none;">
+            <span id="info" style="position:absolute; left:42%; bottom:5px; color:#000; z-index:50; background-color: white;"></span>
+        </div>
+        <!--<div data-dojo-type="dijit/Dialog" data-dojo-id="LroDialog" title="">
+        </div>-->
+    </div>
+    <script type="text/javascript">
+        var package_path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
+
+        //var lokalizacija = 'null';
+
+        //if (lokalizacija == "null") {
+        //    lokalizacija = "sr";
+        //}
+        var dojoConfig = {
+            parseOnLoad: true,
+            async: true,
+            cacheBust: true,
+            extraLocale: ["en"],
+            packages: [{
+                name: "application",
+                location: package_path + '/js'
+            },
+            {
+                name: "dstore",
+                location: package_path + '/js/dstore'
+            },
+            {
+                name: "obv",
+                location: package_path + '/naprave/napravaObavestenja'
+            },
+            {
+                name: "pretraga",
+                location: package_path + '/naprave/napravaPretrage'
+            },
+            {
+                name: "statistika",
+                location: package_path + '/naprave/napravaStatistike'
+            },
+            {
+                name: "podloge",
+                location: package_path + '/naprave/napravaPodloga'
+            },
+            {
+                name: "sadrzaj",
+                location: package_path + '/naprave/tocsad'
+            },
+            {
+                name: "config",
+                location: package_path + '/config'
+            }]
+        };
+        var locale = getQueryVariable("locale");
+        if (locale) {
+            dojoConfig.locale = locale;
+        } else {
+            dojoConfig.locale = "sr";
+        }
+        function getQueryVariable(param) {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair[0] == param) {
+                    return pair[1];
+                }
+            }
+            return (false);
+        }
+    </script>
+    <script type="text/javascript" src="https://js.arcgis.com/3.35/"></script>
+
+    <script type="text/javascript">
+        require([
+            "dojo/parser",
+            "application/main",
+            "dijit/layout/ContentPane",
+            "dijit/layout/BorderContainer"
+        ], function (
+            parser,
+            Main
+        ) {
+            //parser.parse();
+            var myApp = new Main();
+            // start template
+            myApp.startup();
+
+        });
+    </script>
+</body>
+
+</html>
+

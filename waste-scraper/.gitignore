@@ -1,0 +1,7 @@
+# Preuzeti izvorni fajlovi - velicina; URL-ovi su u IZVORI.md
+raw/pdf/*.pdf
+raw/sepa/*.xlsx
+raw/ekoalert/*.html
+raw/news/*.html
+raw/komunalac/*.html
+__pycache__/

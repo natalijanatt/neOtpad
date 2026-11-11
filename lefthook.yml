@@ -1,0 +1,29 @@
+# Git-level enforcement.
+#
+# The .claude/ hooks only run inside Claude Code sessions. These run for anyone
+# who commits in this repository, and they invoke the very same scripts, so
+# there is one definition of "correct" rather than two that can drift.
+#
+# Install once per clone:
+#   npx lefthook install
+pre-commit:
+  parallel: true
+  commands:
+    # Regenerates contracts/openapi.json from the NestJS source, lints it, and
+    # fails if the committed contract is stale. The contracts/ glob is there so
+    # a hand edit to the contract is caught even when no backend file changed.
+    backend-contract:
+      glob: "{backend,contracts}/**"
+      run: cd backend && bash .claude/hooks/guard-contract.sh
+      skip:
+        - merge
+        - rebase
+
+    # Regenerates the typed client from the contract and type-checks the app
+    # against it.
+    frontend-contract:
+      glob: "{frontend,contracts}/**"
+      run: cd frontend && bash .claude/hooks/guard-commit.sh
+      skip:
+        - merge
+        - rebase

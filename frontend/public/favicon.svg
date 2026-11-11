@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 66">
+  <!-- Isti crtež kao src/components/Logo.tsx (LogoMark), sa upisanim bojama palete. -->
+  <path d="M18 9a19 19 0 0 1 28 0" fill="none" stroke="#588265" stroke-width="4" stroke-linecap="round"/>
+  <path d="M24 14a10 10 0 0 1 16 0" fill="none" stroke="#588265" stroke-width="4" stroke-linecap="round"/>
+  <path d="M32 64C32 64 12 48 12 36a20 20 0 0 1 40 0C52 48 32 64 32 64Z" fill="#588265"/>
+  <circle cx="32" cy="36" r="13" fill="#FFFFFF"/>
+  <rect x="29.5" y="27.5" width="5" height="2.4" rx="1" fill="#2F4A39"/>
+  <rect x="24.5" y="29.9" width="15" height="2.8" rx="1.4" fill="#2F4A39"/>
+  <path d="M26.5 34.2h11l-1.2 10.4a1.7 1.7 0 0 1-1.7 1.5h-5.2a1.7 1.7 0 0 1-1.7-1.5Z" fill="#2F4A39"/>
+  <path d="M30.3 37.2v5.6M33.7 37.2v5.6" stroke="#FFFFFF" stroke-width="1.3" stroke-linecap="round"/>
+</svg>

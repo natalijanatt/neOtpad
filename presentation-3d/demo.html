@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="sr-Latn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Od senzora do čiste ulice · Pirot</title>
+<link rel="icon" href="data:,">
+<style>
+/* The only text over the scene is a container reading and the settlement it
+   stands in. The headline copy, the data panel and the step bar are gone, and
+   the shade gradient went with them - it existed to keep that copy readable. */
+@font-face{font-family:Inter;src:url('node_modules/@fontsource/inter/files/inter-latin-ext-400-normal.woff2');font-weight:400}
+@font-face{font-family:Inter;src:url('node_modules/@fontsource/inter/files/inter-latin-ext-600-normal.woff2');font-weight:600}
+*{box-sizing:border-box}body{margin:0;background:#071611;color:#fff;font-family:Inter,Arial,sans-serif;overflow:hidden}
+#stage{width:1920px;height:1080px;position:absolute;transform-origin:top left;overflow:hidden}
+canvas{position:absolute;width:1920px;height:1080px}
+#labels{position:absolute;inset:0;pointer-events:none}
+.maplabel{position:absolute;transform:translate(-50%,-100%);background:#071a15e8;border:1px solid #baffd952;padding:10px 16px;border-radius:10px;font-size:19px;white-space:nowrap;box-shadow:0 8px 24px #0004}
+.maplabel em{font-style:normal;color:#ffbb67;margin-left:12px}
+.maplabel.done em{color:#7df0b2}
+/* Out of the route: dimmed rather than spelled out, so the label stays a reading. */
+.maplabel.skip{opacity:.7;border-color:#ffffff2e}.maplabel.skip em{color:#9fc4b4}
+/* A reading with no settlement next to it: the value carries the colour itself. */
+.maplabel.value{color:#ffbb67;font-weight:600}.maplabel.value.done{color:#7df0b2}
+#fade{position:absolute;inset:0;background:#06120e;pointer-events:none}
+#controls{position:fixed;bottom:8px;left:50%;transform:translateX(-50%);display:none;align-items:center;gap:10px;padding:8px 16px;border-radius:16px;background:#04120feb;z-index:3}button{background:#224936;color:white;border:0;padding:8px 12px;border-radius:8px;cursor:pointer}input{width:240px}#time{font:12px Inter;width:85px}
+</style>
+</head>
+<body>
+<div id="stage">
+ <canvas id="c"></canvas>
+ <div id="labels"></div>
+ <div id="fade"></div>
+</div>
+<div id="controls"><button id="toggle">Pauza</button><input id="seek" type="range" min="0" max="44" step="0.1" aria-label="Vreme videa"><span id="time"></span><button id="restart">Od početka</button></div>
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js"}}</script>
+<script type="module" src="src/demo.js"></script>
+</body></html>

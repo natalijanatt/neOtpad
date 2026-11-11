@@ -1,0 +1,263 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+@import "leaflet/dist/leaflet.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    /* Paleta „Fresh, Organic & Bright“ — imenovane boje, za mesta gde semantika
+       (primary/warning) ne pokriva nameru: tile-ovi, blob dekoracije, bedževi. */
+    --color-green-tea: var(--green-tea);
+    --color-sunflower: var(--sunflower);
+    --color-rose: var(--rose);
+    --color-sour-apple: var(--sour-apple);
+    --color-jade: var(--jade);
+    --color-forest: var(--forest);
+    /* Popunjenost kontejnera */
+    --color-level-low: var(--level-low);
+    --color-level-mid: var(--level-mid);
+    --color-level-high: var(--level-high);
+    --color-level-critical: var(--level-critical);
+    --color-coverage-yes: var(--coverage-yes);
+    --color-coverage-no: var(--coverage-no);
+    /* Prioritet prijave */
+    --color-priority-low: var(--priority-low);
+    --color-priority-medium: var(--priority-medium);
+    --color-priority-high: var(--priority-high);
+    --color-priority-critical: var(--priority-critical);
+    /* Uspeh / upozorenje */
+    --color-success: var(--success);
+    --color-success-foreground: var(--success-foreground);
+    --color-warning: var(--warning);
+    --color-warning-foreground: var(--warning-foreground);
+    --font-heading: var(--font-sans);
+    --font-sans: 'Geist Variable', sans-serif;
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+    /*
+     * Sirova paleta (hex iz „Fresh, Organic & Bright“). Semantički tokeni ispod
+     * se vezuju na nju, pa promena nijanse ide na jednom mestu. Jade i
+     * sunflower su svetle: koriste se za pozadine i ikonice, a za TEKST na
+     * belom postoje tamnije varijante (`--success`, `--warning-foreground`),
+     * inače kontrast pada ispod 3:1.
+     */
+    --green-tea: #F2F6EB;
+    --sunflower: #FFCE55;
+    --rose: #FB6E52;
+    --sour-apple: #DBF5BE;
+    --jade: #92C3A4;
+    --forest: #588265;
+
+    /* Stranica je „skoro bela“ (standard za mobilne aplikacije), a kartice čisto
+       bele — dovoljna razlika da kartica ima ivicu i bez jakog okvira, a
+       ekran ne deluje obojeno. Zelena podloga je ostala samo kao ton čipova. */
+    --background: #FAFBF8;
+    --foreground: #1F2A22;
+    --card: #FFFFFF;
+    --card-foreground: #1F2A22;
+    --popover: #FFFFFF;
+    --popover-foreground: #1F2A22;
+    --primary: var(--forest);
+    --primary-foreground: #FFFFFF;
+    --secondary: var(--sour-apple);
+    --secondary-foreground: #2F4A39;
+    --muted: #EEF2E6;
+    --muted-foreground: #66705F;
+    --accent: #E7F0DA;
+    --accent-foreground: #2F4A39;
+    --destructive: #E0552F;
+    --border: #E1E8D6;
+    --input: #E1E8D6;
+    --ring: var(--forest);
+    --chart-1: var(--forest);
+    --chart-2: var(--jade);
+    --chart-3: var(--sunflower);
+    --chart-4: #F59E42;
+    --chart-5: var(--rose);
+    /* Zaobljenije od shadcn podrazumevanog — kartice i dugmad u građanskom
+       delu su „mekane“, kao u referentnim dizajnima. */
+    --radius: 0.875rem;
+    --sidebar: #F7F9F2;
+    --sidebar-foreground: #1F2A22;
+    --sidebar-primary: var(--forest);
+    --sidebar-primary-foreground: #FFFFFF;
+    --sidebar-accent: #E7F0DA;
+    --sidebar-accent-foreground: #2F4A39;
+    --sidebar-border: #E1E8D6;
+    --sidebar-ring: var(--forest);
+    /* Popunjenost: <50 / 50–79 / 80–94 / ≥95 */
+    --level-low: #5FA97B;
+    --level-mid: #E5B53A;
+    --level-high: #F08A3C;
+    --level-critical: var(--rose);
+    /* Prioritet: nizak / srednji / visok / kritičan */
+    --priority-low: #5FA97B;
+    --priority-medium: #E5B53A;
+    --priority-high: #F08A3C;
+    --priority-critical: var(--rose);
+    /* Pokrivenost organizovanim odvozom: plavo = JKP dolazi, crveno = ne dolazi.
+       Namerno van zelene palete — pokrivenost nije nivo rizika nego činjenica
+       iz dokumenta, pa ne sme da se čita kao još jedan pojas popunjenosti. */
+    --coverage-yes: #2F6FD0;
+    --coverage-no: #D64545;
+    --success: #3F7A55;
+    --success-foreground: #FFFFFF;
+    --warning: var(--sunflower);
+    --warning-foreground: #5C4300;
+}
+
+
+.dark {
+    --green-tea: #1B221C;
+    --sunflower: #FFCE55;
+    --rose: #FB6E52;
+    --sour-apple: #2E4A2C;
+    --jade: #92C3A4;
+    --forest: #7FAE8E;
+
+    --background: #131A15;
+    --foreground: #F1F5EC;
+    --card: #1B241D;
+    --card-foreground: #F1F5EC;
+    --popover: #1B241D;
+    --popover-foreground: #F1F5EC;
+    --primary: var(--forest);
+    --primary-foreground: #0F1A13;
+    --secondary: #263B2A;
+    --secondary-foreground: #DBF5BE;
+    --muted: #243028;
+    --muted-foreground: #A6B3A0;
+    --accent: #243028;
+    --accent-foreground: #F1F5EC;
+    --destructive: #FF8A6C;
+    --border: rgb(255 255 255 / 10%);
+    --input: rgb(255 255 255 / 15%);
+    --ring: var(--forest);
+    --chart-1: var(--forest);
+    --chart-2: var(--jade);
+    --chart-3: var(--sunflower);
+    --chart-4: #F59E42;
+    --chart-5: var(--rose);
+    --sidebar: #1B241D;
+    --sidebar-foreground: #F1F5EC;
+    --sidebar-primary: var(--forest);
+    --sidebar-primary-foreground: #0F1A13;
+    --sidebar-accent: #243028;
+    --sidebar-accent-foreground: #F1F5EC;
+    --sidebar-border: rgb(255 255 255 / 10%);
+    --sidebar-ring: var(--forest);
+    --level-low: #7CC494;
+    --level-mid: #FFCE55;
+    --level-high: #F5A15A;
+    --coverage-yes: #8AB4F8;
+    --coverage-no: #F08A8A;
+    --level-critical: #FF8A6C;
+    --priority-low: #7CC494;
+    --priority-medium: #FFCE55;
+    --priority-high: #F5A15A;
+    --priority-critical: #FF8A6C;
+    --success: #7CC494;
+    --success-foreground: #0F1A13;
+    --warning: #FFCE55;
+    --warning-foreground: #3A2B00;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+/* Leaflet ispod shadcn overlay-a (dialog, sheet, popover) */
+.leaflet-container {
+  z-index: 0;
+  font-family: inherit;
+}
+
+/* Horizontalne trake sa čipovima u građanskom delu: skrol bez vidljivog scrollbara. */
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/*
+ * Puls žarišta na mapi pokrivenosti. Leaflet crta CircleMarker kao <path>, ne
+ * <circle>, pa se poluprečnik ne može animirati — `transform-box: fill-box`
+ * vezuje `scale` za okvir same putanje, umesto za koordinatni početak SVG-a,
+ * gde bi krug odleteo sa svog mesta.
+ *
+ * Ne pulsiraju sve deponije, nego one koje su još žive: 52 tačke koje trepere
+ * su šum, a ne signal.
+ */
+@keyframes zariste-puls {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.5;
+  }
+}
+.zariste-puls {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: zariste-puls 2.4s ease-in-out infinite;
+}
+
+/* Mapa koja pulsira je tačno slučaj za koji ovo podešavanje postoji. */
+@media (prefers-reduced-motion: reduce) {
+  .zariste-puls {
+    animation: none;
+  }
+}

@@ -1,0 +1,4 @@
+Trivial marker commit, authored locally, to unblock a Vercel "Deployment Blocked"
+error (Hobby plan + private repo rejects deploys whose HEAD commit isn't authored
+by the Vercel project owner). Safe to delete once the team is off Hobby or the
+repo is public.

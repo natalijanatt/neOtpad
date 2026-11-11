@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="sr">
+<head>
+<meta charset="utf-8" />
+<title>Pametno upravljanje otpadom — Pirot</title>
+<style>
+  /* Fonts are vendored in node_modules so the headless render never needs the network. */
+  @font-face { font-family:Inter; font-weight:400; font-display:block;
+    src:url("node_modules/@fontsource/inter/files/inter-latin-ext-400-normal.woff2") format("woff2"); }
+  @font-face { font-family:Inter; font-weight:500; font-display:block;
+    src:url("node_modules/@fontsource/inter/files/inter-latin-ext-500-normal.woff2") format("woff2"); }
+  @font-face { font-family:Inter; font-weight:600; font-display:block;
+    src:url("node_modules/@fontsource/inter/files/inter-latin-ext-600-normal.woff2") format("woff2"); }
+  @font-face { font-family:Inter; font-weight:700; font-display:block;
+    src:url("node_modules/@fontsource/inter/files/inter-latin-ext-700-normal.woff2") format("woff2"); }
+  @font-face { font-family:Inter; font-weight:800; font-display:block;
+    src:url("node_modules/@fontsource/inter/files/inter-latin-ext-800-normal.woff2") format("woff2"); }
+  @font-face { font-family:JBMono; font-weight:400; font-display:block;
+    src:url("node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-ext-400-normal.woff2") format("woff2"); }
+  @font-face { font-family:JBMono; font-weight:500; font-display:block;
+    src:url("node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-ext-500-normal.woff2") format("woff2"); }
+
+  :root{
+    /* the app's own tokens (frontend/src/styles/globals.css), converted to sRGB */
+    --primary:#007840; --low:#3fc168; --mid:#ecbe24; --high:#fa7c20; --critical:#e62c2c;
+    --info:#449ac0; --ink:#0b1412; --paper:#ffffff;
+    --w:1920px; --h:1080px;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ background:#05100c; overflow:hidden; }
+  /* Fixed stage: the capture is always 1920x1080 regardless of window size. */
+  #stage{ position:fixed; left:0; top:0; width:var(--w); height:var(--h);
+    transform-origin:0 0; font-family:Inter,system-ui,sans-serif; color:#fff; }
+  canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+
+  #ui{ position:absolute; inset:0; pointer-events:none; }
+
+  /* ---- lower-third title block ---------------------------------------- */
+  #title{ position:absolute; left:92px; bottom:104px; max-width:900px; }
+  #kicker{ display:inline-flex; align-items:center; gap:10px; font-size:19px; font-weight:600;
+    letter-spacing:.16em; text-transform:uppercase; color:#8ff0c0;
+    text-shadow:0 2px 14px rgba(0,0,0,.6); }
+  #kicker .dot{ width:9px; height:9px; border-radius:50%; background:var(--low);
+    box-shadow:0 0 14px var(--low); }
+  #headline{ font-size:66px; font-weight:800; line-height:1.03; letter-spacing:-.022em;
+    margin-top:14px; text-shadow:0 6px 34px rgba(0,0,0,.66); }
+  #sub{ font-size:26px; font-weight:400; line-height:1.34; margin-top:16px; max-width:820px;
+    color:#dff3e8; text-shadow:0 3px 18px rgba(0,0,0,.6); }
+
+  /* ---- telemetry card -------------------------------------------------- */
+  #telemetry{ position:absolute; right:92px; top:104px; width:466px;
+    background:rgba(8,20,16,.72); border:1px solid rgba(160,255,205,.20); border-radius:20px;
+    backdrop-filter:blur(16px); box-shadow:0 26px 70px rgba(0,0,0,.45); overflow:hidden; }
+  .tHead{ display:flex; align-items:center; gap:12px; padding:18px 22px 14px;
+    border-bottom:1px solid rgba(160,255,205,.14); }
+  .tHead .live{ width:9px; height:9px; border-radius:50%; background:var(--low);
+    box-shadow:0 0 12px var(--low); }
+  .tHead .name{ font-family:JBMono; font-size:16px; font-weight:500; letter-spacing:.01em; }
+  .tHead .port{ margin-left:auto; font-size:13px; color:#7fb79c; font-family:JBMono; }
+  #json{ font-family:JBMono; font-size:16.5px; line-height:1.62; padding:16px 22px 20px;
+    white-space:pre; color:#cfe8dc; }
+  #json .k{ color:#7fd6ae; } #json .n{ color:#ffd98a; } #json .s{ color:#9fd0ff; }
+  #json .warn{ color:var(--high); } #json .crit{ color:#ff8b7a; }
+
+  /* fill meter inside the card */
+  #meterWrap{ padding:0 22px 22px; }
+  #meterTop{ display:flex; align-items:baseline; gap:8px; margin-bottom:9px; }
+  #meterPct{ font-size:40px; font-weight:700; letter-spacing:-.02em; font-variant-numeric:tabular-nums; }
+  #meterLbl{ font-size:15px; color:#8bbda7; }
+  #meterEta{ margin-left:auto; font-size:15px; font-weight:600; color:var(--mid); }
+  #meter{ height:12px; border-radius:99px; background:rgba(255,255,255,.10); overflow:hidden; }
+  #meterFill{ height:100%; width:0%; border-radius:99px; background:var(--low);
+    box-shadow:0 0 18px currentColor; }
+
+  /* ---- forecast chart -------------------------------------------------- */
+  #chart{ position:absolute; right:92px; top:560px; width:466px; height:250px;
+    background:rgba(8,20,16,.72); border:1px solid rgba(160,255,205,.20); border-radius:20px;
+    backdrop-filter:blur(16px); padding:18px 22px; box-shadow:0 26px 70px rgba(0,0,0,.45); }
+  #chartTitle{ font-size:16px; font-weight:600; color:#bfe6d4; letter-spacing:.01em; }
+  #chartSub{ font-size:13px; color:#7fb79c; margin-top:3px; }
+  #chartSvg{ position:absolute; left:0; bottom:0; width:100%; height:176px; }
+
+  /* ---- stat strip ------------------------------------------------------ */
+  #stats{ position:absolute; left:92px; top:104px; display:flex; gap:16px; }
+  .stat{ background:rgba(8,20,16,.70); border:1px solid rgba(160,255,205,.18); border-radius:16px;
+    padding:15px 20px 16px; min-width:150px; backdrop-filter:blur(14px); }
+  .stat .v{ font-size:38px; font-weight:700; letter-spacing:-.02em; font-variant-numeric:tabular-nums;
+    line-height:1; }
+  .stat .l{ font-size:14px; color:#95c6b1; margin-top:8px; line-height:1.28; }
+
+  /* ---- legend ---------------------------------------------------------- */
+  #legend{ position:absolute; left:92px; bottom:104px; display:flex; flex-direction:column; gap:11px; }
+  .lg{ display:flex; align-items:center; gap:12px; font-size:19px; color:#e4f4ec;
+    text-shadow:0 2px 10px rgba(0,0,0,.6); }
+  .lg i{ width:15px; height:15px; border-radius:50%; box-shadow:0 0 14px currentColor;
+    background:currentColor; }
+
+  /* ---- day / clock chip ------------------------------------------------ */
+  #clock{ position:absolute; left:50%; top:104px; transform:translateX(-50%);
+    display:flex; align-items:center; gap:14px; background:rgba(8,20,16,.7);
+    border:1px solid rgba(160,255,205,.18); border-radius:99px; padding:11px 24px;
+    backdrop-filter:blur(14px); font-family:JBMono; font-size:19px; letter-spacing:.04em; }
+  #clock .d{ color:#8ff0c0; font-weight:500; }
+
+  /* ---- callout label (3D-anchored) ------------------------------------ */
+  .callout{ position:absolute; transform:translate(0,-50%); }
+  .callout .box{ background:rgba(6,17,13,.84); border:1px solid rgba(160,255,205,.26);
+    border-radius:14px; padding:13px 18px; backdrop-filter:blur(12px);
+    box-shadow:0 18px 44px rgba(0,0,0,.5); }
+  .callout .t{ font-size:20px; font-weight:700; letter-spacing:-.01em; }
+  .callout .s{ font-size:15px; color:#9fd2bb; margin-top:4px; line-height:1.36; font-family:JBMono; }
+
+  /* ---- brand / footer -------------------------------------------------- */
+  #brand{ position:absolute; right:92px; bottom:104px; text-align:right;
+    font-size:17px; color:#a6d4c1; letter-spacing:.02em; text-shadow:0 2px 12px rgba(0,0,0,.6); }
+  #brand b{ color:#fff; font-weight:700; }
+
+  /* ---- full-screen cards (open / end) --------------------------------- */
+  #card{ position:absolute; inset:0; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; gap:22px;
+    /* a scrim, or the title sits unreadably on top of a bright daylight plate */
+    background:radial-gradient(78% 62% at 50% 50%, rgba(3,12,9,.86) 0%,
+      rgba(3,12,9,.62) 55%, rgba(3,12,9,.12) 100%); }
+  #cardKick{ font-size:21px; font-weight:600; letter-spacing:.22em; text-transform:uppercase;
+    color:#8ff0c0; }
+  #cardTitle{ font-size:92px; font-weight:800; letter-spacing:-.03em; line-height:1.02; max-width:1500px; }
+  #cardSub{ font-size:30px; color:#cfe9dc; max-width:1180px; line-height:1.36; }
+  #cardRule{ width:120px; height:4px; border-radius:99px; background:var(--low);
+    box-shadow:0 0 22px var(--low); }
+  #vignette{ position:absolute; inset:0;
+    background:
+      linear-gradient(to top right, rgba(3,13,10,.82) 0%, rgba(3,13,10,.45) 26%, transparent 52%),
+      linear-gradient(to bottom, rgba(3,13,10,.38) 0%, transparent 22%),
+      radial-gradient(120% 90% at 50% 45%, transparent 38%, rgba(2,8,6,.5) 100%); }
+  .fade{ opacity:0; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <canvas id="c"></canvas>
+  <div id="ui">
+    <div id="vignette"></div>
+
+    <div id="stats" class="fade"></div>
+
+    <div id="clock" class="fade"><span class="d">—</span><span class="h">—</span></div>
+
+    <div id="telemetry" class="fade">
+      <div class="tHead">
+        <span class="live"></span>
+        <span class="name">PI-BER-003</span>
+        <span class="port">LoRaWAN · EU868 · fPort 85</span>
+      </div>
+      <div id="json"></div>
+      <div id="meterWrap">
+        <div id="meterTop">
+          <span id="meterPct">0%</span><span id="meterLbl">popunjenost</span>
+          <span id="meterEta"></span>
+        </div>
+        <div id="meter"><div id="meterFill"></div></div>
+      </div>
+    </div>
+
+    <div id="chart" class="fade">
+      <div id="chartTitle">Prognoza popunjenosti</div>
+      <div id="chartSub">izmereno · prognoza · prag 80%</div>
+      <svg id="chartSvg" viewBox="0 0 466 176" preserveAspectRatio="none"></svg>
+    </div>
+
+    <div id="legend" class="fade"></div>
+
+    <div id="title" class="fade">
+      <div id="kicker"><span class="dot"></span><span class="tx"></span></div>
+      <div id="headline"></div>
+      <div id="sub"></div>
+    </div>
+
+    <div id="brand" class="fade"></div>
+
+    <div id="callouts"></div>
+
+    <div id="card" class="fade">
+      <div id="cardKick"></div>
+      <div id="cardTitle"></div>
+      <div id="cardRule"></div>
+      <div id="cardSub"></div>
+    </div>
+  </div>
+</div>
+<script type="importmap">
+{ "imports": { "three": "/node_modules/three/build/three.module.js" } }
+</script>
+<script type="module" src="src/main.js"></script>
+</body>
+</html>

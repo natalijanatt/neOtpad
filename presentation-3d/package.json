@@ -1,0 +1,22 @@
+{
+  "name": "presentation-3d",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "render:demo": "node render-demo.js",
+    "stills:demo": "node render-demo.js --at 2,6,10,14,18,20,24,28,32,36,38,42",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "description": "",
+  "dependencies": {
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "puppeteer-core": "^24.43.1",
+    "three": "^0.186.0"
+  }
+}

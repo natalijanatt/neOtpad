@@ -1,0 +1,18 @@
+# Generated artefacts must be byte-identical on every machine.
+#
+# The OpenAPI generator and openapi-typescript both write LF. Without these
+# rules, a Windows checkout with core.autocrlf=true rewrites them to CRLF, the
+# next generation run rewrites them back to LF, and the pre-commit guard blocks
+# every commit over a diff nobody made.
+* text=auto eol=lf
+
+contracts/openapi.json text eol=lf
+contracts/package.json text eol=lf
+frontend/src/api/generated/** text eol=lf
+
+# Hook scripts run under Git Bash on Windows; CRLF breaks the shebang line.
+*.sh text eol=lf
+
+# Keep these out of language statistics and collapsed in diffs.
+frontend/src/api/generated/** linguist-generated=true
+contracts/openapi.json linguist-generated=true

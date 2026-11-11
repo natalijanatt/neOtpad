@@ -1,0 +1,4 @@
+.vercel
+.env*
+# Primer bez tajni ide u repo, prave vrednosti ne.
+!.env.example

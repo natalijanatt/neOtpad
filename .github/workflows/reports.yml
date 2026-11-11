@@ -1,0 +1,53 @@
+name: reports backend
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  reports:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgis/postgis:17-3.5
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 54322:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+      - run: npm ci
+      - name: Create roles expected by Supabase migrations
+        run: |
+          node <<'NODE'
+          const { Client } = require('pg');
+          async function main() {
+            const client = new Client({ connectionString: 'postgresql://postgres:postgres@127.0.0.1:54322/postgres' });
+            await client.connect();
+            try {
+              await client.query('create role anon; create role authenticated; create role service_role');
+            } finally {
+              await client.end();
+            }
+          }
+          main().catch(error => { console.error(error.message); process.exitCode = 1; });
+          NODE
+      - run: npm run db:types:test
+      - run: git diff --exit-code -- src/database/generated/schema.ts
+      - run: npm run typecheck
+      - run: npm run build
+      - run: npm run test:integration

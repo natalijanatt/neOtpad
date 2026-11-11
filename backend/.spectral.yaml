@@ -1,0 +1,91 @@
+# Contract quality gate.
+#
+# These rules exist because the frontend is built against a Prism mock generated
+# from this document, on a different machine, without the backend running. A
+# field without an `example` produces a mock that returns nothing useful, and an
+# operation without a documented success response produces a generated client
+# with no return type. Both are silent failures, so they are errors here.
+#
+# Run with: npm run contract:lint
+
+extends: ["spectral:oas"]
+
+rules:
+  # --- promoted from the recommended ruleset -------------------------------
+  # The generated frontend client names its methods after operationId. Without
+  # one, openapi-typescript falls back to path-derived names that churn on every
+  # route rename.
+  operation-operationId: error
+  operation-operationId-unique: error
+  operation-operationId-valid-in-url: error
+  oas3-valid-media-example: error
+  oas3-valid-schema-example: error
+
+  # Noise for a service that is documented by generation, not by hand.
+  info-contact: off
+  oas3-unused-component: off
+
+  # --- contract-first requirements ----------------------------------------
+  operation-has-success-response:
+    description: Every operation must document a success response.
+    message: "{{path}} documents no 2xx response. Add @ApiOkResponse/@ApiCreatedResponse to the controller method."
+    severity: error
+    given: "$.paths[*][get,put,post,delete,patch].responses"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          anyOf:
+            - required: ["200"]
+            - required: ["201"]
+            - required: ["202"]
+            - required: ["204"]
+
+  success-response-has-description:
+    description: A success response must say what it means.
+    message: "{{path}} has no description. Pass `description:` to the @ApiResponse decorator."
+    severity: error
+    given: "$.paths[*][get,put,post,delete,patch].responses[?(@property.match(/^2/))]"
+    then:
+      field: description
+      function: truthy
+
+  success-response-has-schema:
+    description: A success response body must be typed, otherwise the generated client returns `unknown`.
+    message: "{{path}} has a body with no schema. Pass `type:` to the @ApiResponse decorator."
+    severity: error
+    given: "$.paths[*][get,put,post,delete,patch].responses[?(@property.match(/^2/))].content[*]"
+    then:
+      field: schema
+      function: truthy
+
+  schema-property-has-example:
+    description: Every scalar DTO field needs an example; the Prism mock is built from them.
+    message: "{{path}} has no `example`. Add one to the @ApiProperty decorator."
+    severity: error
+    given: "$.components.schemas..properties[*]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          if:
+            type: object
+            properties:
+              type:
+                enum: ["object", "array"]
+            required: ["type"]
+          then: true
+          else:
+            type: object
+            required: ["example"]
+
+  schema-property-has-description:
+    description: Every DTO field needs a description; it becomes the JSDoc on the generated client type.
+    message: "{{path}} has no `description`. Add one to the @ApiProperty decorator."
+    severity: error
+    given: "$.components.schemas..properties[*]"
+    then:
+      field: description
+      function: truthy

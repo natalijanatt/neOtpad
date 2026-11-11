@@ -1,0 +1,14 @@
+{
+  "name": "@hackaton/api-contract",
+  "version": "0.8.0",
+  "private": true,
+  "description": "The OpenAPI contract between backend and frontend. Generated from the NestJS source, never hand-edited.",
+  "license": "UNLICENSED",
+  "files": [
+    "openapi.json"
+  ],
+  "exports": {
+    ".": "./openapi.json",
+    "./openapi.json": "./openapi.json"
+  }
+}

@@ -1,0 +1,53 @@
+﻿kanonski_id,naziv,naselje,lat,lon,geo_preciznost,katastarska_parcela,prvi_put_zabelezena,poslednji_put_zabelezena,godine_evidentirana,broj_izvornih_redova,broj_opservacija,izvori,povrsina_m2,zapremina_m3,kolicina_t,ociscena_datum,ponovo_se_stvara,status,spajanje_pouzdanost,izvorni_redovi
+K-01,divlja deponija,Sukovo,43.048063,22.650082,centroid_naselja,,2024,2024,2024,1,1,EKOALERT,,,,,nepoznato,prijavljeno,,EKOALERT-26
+K-02,puni kontenjeri se ne prazne,selo sukovo,43.048063,22.650082,centroid_naselja,,2026,2026,2026,1,1,EKOALERT,,,,,nepoznato,prijavljeno,,EKOALERT-47
+K-03,divlja deponija selo Petrovac,selo petrovac,43.077901,22.617633,centroid_naselja,,2026,2026,2026,1,1,EKOALERT,,,,,da,prijavljeno,,EKOALERT-43
+K-04,Mali Jovanovac,Mali Jovanovac,43.10622,22.668432,centroid_naselja,869/2,2020,2021,2020;2021,1,1,LPUO,31361.0,150.0,,,da,evidentirana u LPUO 2021-2031,,LPUO-15
+K-05,Veliko Selo,Veliko Selo,43.106672,22.674809,centroid_naselja,777,2020,2021,2020;2021,1,1,LPUO,22284.0,100.0,,,da,evidentirana u LPUO 2021-2031,,LPUO-16
+K-06,Akcija ciscenja - Veliki Jovanovac,Veliki Jovanovac,43.111178,22.652309,centroid_naselja,,2024,2024,2024,1,1,CIST,,,,2024-07-24,nepoznato,ocisceno,,CIST-09
+K-07,"Divlja deponija Krupac (43.1160, 22.6751) | Krupac",Krupac,43.116004,22.675066,registarska_tacka,11713,2018,2021,2018;2020;2021,2,2,LPUO | SEPA,26332.0,150.0,10.0,,da,nije prijavljena posle 2018; evidentirana u LPUO 2021-2031,srednja,SEPA-01;LPUO-17
+K-08,"Divlja deponija Pirot (43.1161, 22.5716)",Pirot,43.116126,22.571624,registarska_tacka,,2018,2018,2018,1,1,SEPA,200.0,,4.0,,da,nije prijavljena posle 2018,,SEPA-02
+K-09,Trnjana,Trnjana,43.121022,22.653628,centroid_naselja,151,2020,2021,2020;2021,1,1,LPUO,10024.0,150.0,,,da,evidentirana u LPUO 2021-2031,,LPUO-14
+K-10,Pored kompenzacionog bazena lokacija 3 | Pored reke Nišave,Poljska Ržana,43.12773,22.627135,centroid_naselja,3785/1,2020,2021,2020;2021,2,2,LPUO,369626.0,275.0,,,da,evidentirana u LPUO 2021-2031,visoka,LPUO-07;LPUO-08
+K-11,Poljska Ržana,Poljska Ržana,43.12773,22.627135,centroid_naselja,,2020,2021,2020;2021,1,1,LPUO,,3000.0,,,da,evidentirana u LPUO 2021-2031,,LPUO-19
+K-12,Akcija ciscenja - Poljska Ržana,Poljska Ržana,43.12773,22.627135,centroid_naselja,,2023,2023,2023,1,1,CIST,,,,2023-11-01,nepoznato,ocisceno,,CIST-02
+K-13,"Divlja deponija Pirot (43.1328, 22.5886)",Pirot,43.1328,22.5886,registarska_tacka,,2019,2024,2019;2020;2021;2022;2023;2024,1,6,SEPA,150.0,,10.0,,da,aktivna (prijavljena i za 2024),,SEPA-03
+K-14,"Divlja deponija Pirot (43.1364, 22.5912)",Pirot,43.136375,22.591225,registarska_tacka,,2018,2018,2018,1,1,SEPA,1000.0,,15.0,,da,nije prijavljena posle 2018,,SEPA-04
+K-15,eko problem u Barje Čiflik,Barje Čiflik,43.138324,22.542208,centroid_naselja,,2024,2024,2024,1,1,EKOALERT,,,,,da,prijavljeno,,EKOALERT-22
+K-16,Prisjansko naselje Strelište | Divlje smetliste Prisjan (gradjevinski otpad),Prisjan,43.139,22.5885,priblizno_naselje,6633/3,2020,2025,2020;2021;2025,2,2,LPUO | PRISJAN,28801.0,40.0,,,da,evidentirana u LPUO 2021-2031; planirana sanacija / zatvaranje,visoka,LPUO-02;PRISJAN-01
+K-17,"Divlja deponija Pirot (43.1410, 22.5913) | Kavak",Pirot; Kavak,43.141018,22.591338,registarska_tacka,6634/4,2018,2021,2018;2020;2021,2,2,LPUO | SEPA,2793.0,150.0,1.0,,da,nije prijavljena posle 2018; evidentirana u LPUO 2021-2031,srednja,SEPA-06;LPUO-03
+K-18,"Divlja deponija Pirot (43.1410, 22.6120)",Pirot,43.141,22.612,registarska_tacka,,2019,2024,2019;2020;2021;2022;2023;2024,1,9,SEPA,150.0,,15.0,,ne,aktivna (prijavljena i za 2024),,SEPA-05
+K-19,"Divlja deponija Pirot (43.1445, 22.6097) | Nišavska dolina iza niskogradnje",Pirot; Zaluzje,43.1445,22.6097,registarska_tacka,4292,2019,2024,2019;2020;2021;2022;2023;2024,2,10,LPUO | SEPA,463.0,250.0,15.0,,da,aktivna (prijavljena i za 2024); evidentirana u LPUO 2021-2031,srednja,SEPA-07;LPUO-04
+K-20,"Divlja deponija Pirot (43.1446, 22.6032)",Pirot,43.144595,22.603156,registarska_tacka,,2018,2018,2018,1,1,SEPA,100.0,,2.0,,da,nije prijavljena posle 2018,,SEPA-08
+K-21,Pored kompenzacionog bazena blizu Kubik Trans baza lokacija 1,Zaluzje,43.1455,22.618,priblizno_zona,2185/3,2020,2021,2020;2021,1,1,LPUO,2747.0,100.0,,,da,evidentirana u LPUO 2021-2031,,LPUO-05
+K-22,Pored kompenzacionog bazena blizu Kubik Trans baza lokacija 2,Zaluzje,43.1455,22.618,priblizno_zona,2171,2020,2021,2020;2021,1,1,LPUO,509.0,100.0,,,da,evidentirana u LPUO 2021-2031,,LPUO-06
+K-23,Staro korito reke Nišave,Zaluzje,43.1455,22.618,priblizno_zona,5915/1,2020,2021,2020;2021,1,1,LPUO,22483.0,3500.0,,,da,evidentirana u LPUO 2021-2031,,LPUO-13
+K-24,Deponiju ostavili migranti,Kompezacioni bazen - staro gradsko kupališta,43.1455,22.618,priblizno_zona,,2024,2024,2024,1,1,EKOALERT,,,,,nepoznato,prijavljeno,,EKOALERT-28
+K-25,Akcija ciscenja - Zaluzje,Zaluzje,43.1455,22.618,priblizno_zona,,2024,2024,2024,1,1,CIST,,,,2024-04-12,nepoznato,ocisceno,,CIST-06
+K-26,"Divlja deponija Pirot (43.1475, 22.5805) | Romsko naselje",Pirot; Barje,43.1475,22.5805,registarska_tacka,4080/209,2019,2024,2019;2020;2021;2022;2023;2024,2,7,LPUO | SEPA,1140.0,50.0,5.0,,da,aktivna (prijavljena i za 2024); evidentirana u LPUO 2021-2031,srednja,SEPA-09;LPUO-01
+K-27,Stara nesanitarna gradska deponija (staro gradsko smetliste),Pirot - industrijska zona / staro korito Nisave,43.147,22.61,priblizno_zona,"2130/1,2130/3,2131/2,2132/1,2132/3,2133/2,2134/2,2135/2,2136/1,2137/1,2137/2,2137/6,2138/1,2139/1,2140,2181/1,2181/4,2181/5,2181/6,2182,2183,2184,2185,2186,2187,2188,2189,2190/1,2190/4,6568/8,6568/9,6568/23,6568/28,6568/29,6568/30,6568/32,6568/33,6568/40",2004,2026,2004;2019;2020;2026,1,4,STARA,50000.0,469262.0,,"u toku (faza 1 do kraja marta 2026, zavrsetak kraj 2026)",ne,u sanaciji,,STARA-01
+K-28,Izvor,Izvor,43.147616,22.635018,centroid_naselja,3758,2020,2021,2020;2021,1,1,LPUO,682.0,3000.0,,,da,evidentirana u LPUO 2021-2031,,LPUO-18
+K-29,divlje deponije,selo Izvor,43.147616,22.635018,centroid_naselja,,2024,2024,2024,1,1,EKOALERT,,,,,nepoznato,prijavljeno,,EKOALERT-30
+K-30,"Divlja deponija Pirot (43.1481, 22.5716) | Divlja deponija Pirot (43.1481, 22.5761)",Pirot,43.1481,22.5716,registarska_tacka,,2019,2024,2019;2020;2021;2022;2023;2024,2,6,SEPA,50.0,,3.0,,da,aktivna (prijavljena i za 2024); nije prijavljena posle 2021,visoka,SEPA-10;SEPA-11
+K-31,Akcija ciscenja - Pirot,Pirot,43.1528,22.586,centar_grada,,2019,2019,2019,1,1,CIST,,,,2019-05-29,nepoznato,ocisceno,,CIST-10
+K-32,Akcija ciscenja - Pirot,Pirot,43.1528,22.586,centar_grada,,2023,2023,2023,1,1,CIST,,,,2023-06-15,nepoznato,ocisceno,,CIST-11
+K-33,Akcija ciscenja - Berilovac,Berilovac,43.158468,22.615677,centroid_naselja,,2023,2023,2023,1,1,CIST,,,,2023-12-31,nepoznato,ocisceno,,CIST-01
+K-34,Četvrti kilometar,Crveni Breg,43.1585,22.6157,priblizno_naselje,941,2020,2021,2020;2021,1,1,LPUO,2393.0,100.0,,,da,evidentirana u LPUO 2021-2031,,LPUO-09
+K-35,djubre na troatoaru,M.Z.Berilovskakapija,43.159423,22.592525,ulica,,2026,2026,2026,1,1,EKOALERT,,,,,da,prijavljeno,,EKOALERT-49
+K-36,Divlja deponija iza centrale,svetozara markovića  Tijabara,43.159461,22.592323,prijava_gradjanina,,2026,2026,2026,1,1,EKOALERT,,,,,nepoznato,prijavljeno,,EKOALERT-50
+K-37,Otpad u reci Rogoz,Pirot,43.159784,22.581273,centroid_naselja,,2026,2026,2026,1,1,EKOALERT,,,,,nepoznato,prijavljeno,,EKOALERT-39
+K-38,divlja deponija neko je opet pred kontenjera na raskrsnici cara dusana | gradjevinski otpad komšije ili neki nesavesni gradjani iz obližnjih ul,cara dusana; cara dušana,43.160815,22.595568,ulica,,2023,2026,2023;2026,2,2,EKOALERT,,,,,da,prijavljeno,visoka,EKOALERT-19;EKOALERT-48
+K-39,djubre izvan kontenjera,Ustanička ulica,43.160815,22.595568,ulica,,2026,2026,2026,1,1,EKOALERT,,,,,da,prijavljeno,,EKOALERT-46
+K-40,Akcija ciscenja - Tijabara,Tijabara,43.161571,22.593309,centroid_naselja,,2023,2023,2023,1,1,CIST,,,,2023-11-01,nepoznato,ocisceno,,CIST-04
+K-41,"Divlja deponija Gnjilan (43.1630, 22.5700) | Gnjilan, Sarlah",Gnjilan; Sarlah,43.163033,22.57,registarska_tacka,3701,2019,2024,2019;2020;2021;2022;2023;2024,2,7,LPUO | SEPA,61595.0,20.0,2.0,,da,aktivna (prijavljena i za 2024); evidentirana u LPUO 2021-2031,srednja,SEPA-12;LPUO-11
+K-42,"Divlja deponija Gnjilan (43.1697, 22.5479) | Gnjilan",Gnjilan; Belava,43.1697,22.5479,registarska_tacka,1404,2019,2024,2019;2020;2021;2022;2023;2024,2,7,LPUO | SEPA,443473.0,200.0,10.0,,da,aktivna (prijavljena i za 2024); evidentirana u LPUO 2021-2031,srednja,SEPA-13;LPUO-12
+K-43,Džungla deponija,Naselje Prčevac,43.170621,22.60242,centroid_naselja,,2024,2024,2024,1,1,EKOALERT,,,,,da,prijavljeno,,EKOALERT-32
+K-44,Akcija ciscenja - Rsovci,Rsovci,43.172351,22.775029,centroid_naselja,,2024,2024,2024,1,1,CIST,,,,2024-06-18,nepoznato,ocisceno,,CIST-08
+K-45,"Divlja deponija Pirot (43.1740, 22.6220)",Pirot,43.174,22.622,registarska_tacka,,2019,2024,2019;2020;2021;2022;2023;2024,1,6,SEPA,100.0,,8.0,,da,aktivna (prijavljena i za 2024),,SEPA-14
+K-46,"Divlja deponija Gnjilan/Gradašnica/Gradište (43.1821, 22.6002) | Gradašnica",Gnjilan; Gradašnica; Gradište,43.1821,22.6002,registarska_tacka,3276,2019,2024,2019;2020;2021;2022;2023;2024,2,7,LPUO | SEPA,15838.0,80.0,5.0,,da,aktivna (prijavljena i za 2024); evidentirana u LPUO 2021-2031,srednja,SEPA-15;LPUO-10
+K-47,katastarska parcela 4455,Pirot-grad,43.184282,22.595142,centroid_naselja,4455,2026,2026,2026,1,1,EKOALERT,,,,,nepoznato,prijavljeno,,EKOALERT-40
+K-48,djubre,selo Stanićenje,43.20408,22.510129,centroid_naselja,,2024,2024,2024,1,1,EKOALERT,,,,,nepoznato,prijavljeno,,EKOALERT-31
+K-49,Akcija ciscenja - Crnoklište,Crnoklište,43.234167,22.467191,centroid_naselja,,2023,2023,2023,1,1,CIST,,,,2023-07-20,nepoznato,ocisceno,,CIST-03
+K-50,Zagadjene reke stare planine,Zaskovci,43.326993,22.614769,centroid_naselja,,2024,2024,2024,1,1,EKOALERT,,,,,nepoznato,prijavljeno,,EKOALERT-29
+K-51,Akcija ciscenja - Topli Do,Topli Do,43.34039,22.679765,centroid_naselja,,2023,2023,2023,1,1,CIST,,,,2023-11-04,nepoznato,ocisceno,,CIST-05
+K-52,Akcija ciscenja - Topli Do,Topli Do,43.34039,22.679765,centroid_naselja,,2024,2024,2024,1,1,CIST,,,,2024-04-30,nepoznato,ocisceno,,CIST-07

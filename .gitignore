@@ -1,0 +1,39 @@
+# Dependencies
+node_modules
+
+# Build output
+/dist
+backend/dist
+frontend/dist
+presentation-3d/out
+/build
+/tmp
+.tsbuildinfo
+*.tsbuildinfo
+
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# dotenv environment variable files
+.env
+.env.*
+!.env.example
+
+# Claude Code, machine-specific settings only.
+# .claude/settings.json IS committed: the hooks are part of the contract setup.
+**/.claude/settings.local.json
+
+# temp directory
+.temp
+.tmp
+
+# JetBrains IDE project files
+.idea/
+.vercel
+.env*
